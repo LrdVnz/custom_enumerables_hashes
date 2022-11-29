@@ -1,14 +1,29 @@
 require './lib/enumerable.rb'
 
 describe Enumerable do 
+   subject(:hash)  { {:a => 1, :b => 3, :c => 6} }
    describe ".my-each" do
-      it "passes the block on each key-value and returns them" do
-          example_hash = {:a => 1, :b => 3, :c => 6}
-          my_proc =  Proc.new { |key, value| 
-            puts "key is #{key}, value is #{value}" }
 
+      it "returns an empty hash if the block is empty" do
+         
+         expect(hash.my_each { |key, value| #nothing here
+         }).to eq(hash)
 
-          expect(example_hash.my_each(&my_proc)).to eq(example_hash.each(&my_proc))
+      end
+
+      it "passes the block on each key-value pair" do
+          my_each_result = {}
+         each_result = {}
+          
+         hash.my_each { |key, value| 
+            my_each_result[key] = value 
+         }
+
+         hash.each { |key, value| 
+            each_result[key] = value 
+         }
+
+          expect(my_each_result).to eq(each_result)
           
       end
    end

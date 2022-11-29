@@ -2,23 +2,21 @@ module Enumerable
 
 
 
-
-
 end
 
 
 class Hash 
 
-
- def my_each(&block)
+  def my_each(&block)
      i = 0 
-    while i < self.count
-     block.call(self[i]) 
+     hash_values = self.values 
+     hash_keys = self.keys 
+
+     while i < self.count
+      block.call(hash_keys[i], hash_values[i] ) 
       i+= 1 
-    end
-   
-
+     end
+    self
  end
-
 
 end
