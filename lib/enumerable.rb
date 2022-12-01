@@ -1,6 +1,19 @@
 module Enumerable
 
-
+   def my_any?(block)
+       result = false 
+       if block == nil 
+         result = true 
+       else
+         self.my_each { |key, value|
+           result = block.call(key, value)
+         }
+      end
+     
+     puts "yhooooo tha result is #{result}"
+     result
+      
+   end
 
 end
 
