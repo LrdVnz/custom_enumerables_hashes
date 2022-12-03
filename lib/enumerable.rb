@@ -2,7 +2,7 @@ module Enumerable
 
    def my_any?(block)
        result = false 
-       if block == nil 
+       if block.call(key = 1, value = 1) === nil 
          result = true 
        else
          self.my_each { |key, value|
@@ -10,7 +10,6 @@ module Enumerable
          }
       end
      
-     puts "yhooooo tha result is #{result}"
      result
       
    end
