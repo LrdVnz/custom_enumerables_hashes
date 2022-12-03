@@ -59,4 +59,36 @@ describe Enumerable do
          end
        end
    end
+
+
+   describe ".my_each_key" do 
+      context "when given no block" do
+        it "returns the original hash" do 
+           resulting_hash = hash.my_each_key 
+
+            expect(resulting_hash).to eq(hash)
+
+        end
+      end
+
+      context "when given a valid block" do
+        it "runs the block on each key" do
+         my_each_key_array = []
+         each_key_array = []
+         
+         hash.my_each_key  { |key| 
+            my_each_key_array.push(key)
+         }
+    
+          hash.each_key { |key| 
+               each_key_array.push(key)
+            }
+
+            expect(my_each_key_array).to eq(each_key_array)
+         
+        end
+      end
+   end
+
+
 end

@@ -9,10 +9,20 @@ module Enumerable
            result = block.call(key, value)
          }
       end
-     
      result
-      
    end
+
+   def my_each_key(&block)
+     resulting_hash = {}
+
+     return self if block_given? == false  
+
+     self.my_each { |key, value| 
+         block.call(key, value)
+     }
+
+   end
+
 
 end
 
