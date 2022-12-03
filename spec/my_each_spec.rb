@@ -90,5 +90,99 @@ describe Enumerable do
       end
    end
 
+   describe ".my_select" do 
+      context "when given an empty block" do 
+         it "returns the original hash" do 
+           
+            my_proc = Proc.new {}
+             
+            expect(hash.my_select(my_proc)).to eq(hash)
+         end
+      end
+
+      context "when given a valid block" do 
+         it "returns an hash with truthy values" do 
+            my_proc = Proc.new { |key, value| 
+                   value >= 3 
+            }
+
+            expect(hash.my_select(my_proc)).to eq(hash.select(&my_proc))
+
+         end
+      end
+   end
+
+   describe ".my_fetch" do 
+      context "when given an empty block" do 
+        it "returns the default value given" do 
+            
+         expect(hash.my_fetch(:f, 9)).to eq(hash.fetch(:f,9))
+
+        end
+      end
+
+      context "when a given key is found" do 
+         it "returns its value" do 
+          
+            expect(hash.my_fetch(:a)).to eq(1)
+
+         end
+      end 
+   end 
+
+
+   describe ".my_has_key" do 
+       context "when given a key" do 
+         it "returns true if the key is present" do 
+                
+            expect(hash.my_has_key(:b)).to eq(true)
+
+         end
+
+         it "returns false if key isn't present" do 
+            
+            expect(hash.my_has_key(:f)).to eq(false)
+         end
+       end
+   end
+
+   describe ".my_has_value" do 
+       context "when given a value" do 
+          it "returns true if value is present" do
+         
+           expect(hash.my_has_value(3)).to eq(true)
+          end
+
+          it "returns false if value isn't present" do 
+
+           expect(hash.my_has_value(4)).to eq(false)
+          end 
+       end 
+   end 
+
+   describe ".my_size" do 
+     context "when given an hash" do 
+       it "returns the size of it" do 
+            
+         expect(hash.my_size).to eq(hash.size)
+
+       end
+     end
+   end 
+
+   describe ".my_transform_keys " do 
+      context "when given a block" do 
+          it "returns an hash with the transformed keys" do 
+            my_proc = Proc.new { |key| 
+               if key == :a or key == :b
+                 key = key.to_s
+               end
+            }
+
+            expect(hash.my_transform_keys(my_proc)).to eq(hash.transform_keys(&my_proc))
+
+          end
+      end
+   end 
 
 end
