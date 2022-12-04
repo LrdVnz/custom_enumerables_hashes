@@ -83,7 +83,7 @@ module Enumerable
 
    end 
 
-   def my_transform_keys(block)
+   def my_transform_keys(&block)
        return self if block_given? == false 
       
        resulting_hash = {}
@@ -91,6 +91,19 @@ module Enumerable
 
        self.my_each { |key, value| 
           resulting_hash[block.call(key,value)] = value 
+      }
+
+      resulting_hash
+
+   end 
+
+   def my_transform_values(&block)
+       return self if block_given? == false 
+
+       resulting_hash = {} 
+
+       self.my_each { |key, value| 
+            resulting_hash[key] = block.call(value)
       }
 
       resulting_hash

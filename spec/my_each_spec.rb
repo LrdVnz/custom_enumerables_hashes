@@ -179,10 +179,25 @@ describe Enumerable do
                end
             }
 
-            expect(hash.my_transform_keys(my_proc)).to eq(hash.transform_keys(&my_proc))
+            expect(hash.my_transform_keys(&my_proc)).to eq(hash.transform_keys(&my_proc))
 
           end
       end
+   end 
+
+   describe ".my_transform_values " do 
+       context "when given a block" do 
+         it "returns an hash with the transformed values" do 
+            my_proc = Proc.new { |value| 
+               if value <= 3 
+                  value = value * 2 
+               end 
+            }
+
+            expect(hash.my_transform_values(&my_proc)).to eq(hash.transform_values(&my_proc))
+
+         end 
+       end 
    end 
 
 end
